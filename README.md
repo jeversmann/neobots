@@ -1,4 +1,4 @@
-neobots
-=======
+Neo-bots
+========
 
-Neobots
+Programs built to solve games on www.neopets.com
