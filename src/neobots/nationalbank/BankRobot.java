@@ -1,3 +1,6 @@
+package neobots.nationalbank;
+
+import neobots.common.GameRobot;
 import java.awt.*;
 import java.util.*;
 

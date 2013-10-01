@@ -1,3 +1,6 @@
+package neobots.typingterror;
+
+import neobots.common.GameRobot;
 import java.awt.*;
 
 public class TypingRobot extends GameRobot {

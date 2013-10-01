@@ -1,4 +1,7 @@
-import masterMind.*;
+package neobots.timetunnel;
+
+import neobots.common.GameRobot;
+import mastermind.*;
 import java.awt.*;
 
 public class TimeRobot extends GameRobot {
