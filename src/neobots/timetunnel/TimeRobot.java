@@ -28,7 +28,7 @@ public class TimeRobot extends GameRobot {
 	}
 
 	public void play() {
-		if(!align("build/timeTunnel.png")) {
+		if(!align("build/timetunnel.png")) {
 				return;
 		}
 		click(scrLocs[0], 100);

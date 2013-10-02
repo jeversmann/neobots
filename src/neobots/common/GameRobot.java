@@ -48,7 +48,7 @@ public class GameRobot {
 		boolean set = false;
 		//Searches in the top left region of the screen
 		for(int i = 15; i < 200 & !set; i++) {
-			for(int j = 150; j < 300 & !set; j++) {
+			for(int j = 15; j < 200 & !set; j++) {
 				found = getColorSave(i, j);
 				R.mouseMove(i,j);
 				//This logic is currently lame
@@ -66,6 +66,7 @@ public class GameRobot {
 		try {
 			return this.align(ImageIO.read(new File(loc)));
 		} catch (Exception e) {
+            System.err.println(e.toString());
 			return false;
 		}
 	}

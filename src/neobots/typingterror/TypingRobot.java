@@ -20,14 +20,14 @@ public class TypingRobot extends GameRobot {
 	}
 
 	public void play() {
-		if(!align("build/typingTerror.png")) {
+		if(!align("build/typingterror.png")) {
 			return;
 		}
 		click(scrLocs[0], 100);
 		wait(1000);
 		click(scrLocs[1], 100);
 		wait(2000);
-		String alpha = "abcdefghijklmnopqrstuvwxyz";
+		String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 		while(true) {
 			for(char a : alpha.toCharArray()) {
 				press(a);

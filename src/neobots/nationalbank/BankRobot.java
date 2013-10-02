@@ -18,8 +18,10 @@ public class BankRobot extends GameRobot {
 	public void play() {
 		Color[] doors = new Color[6];
 		boolean[] open = new boolean[6];
-		if(!align("build/nationalBank.png"))
+		if(!align("build/nationalbank.png"))
 			return;
+        press(' ');
+        wait(100);
 		Color wall = getColorRT(267, 50);
 		for(int i = 0; i < 6; i++) {
 			doors[i] = getColorRT(doorLoc[i], 150);
@@ -40,7 +42,7 @@ public class BankRobot extends GameRobot {
 			}
 			for(int i = 0; i < 6; i++) {
 				temp = getColorRT(doorLoc[i], 150);
-				move(doorLoc[i], 150);
+				//move(doorLoc[i], 150);
 			 	if(doors[i].getRGB() != temp.getRGB()) {
 					int[] colorSum = new int[3];
 					if(open[i]) {
