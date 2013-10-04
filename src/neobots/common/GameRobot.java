@@ -14,6 +14,7 @@ public class GameRobot {
 	private Robot R;
 	private BufferedImage scrSave;
 	private Rectangle scrSize;
+    private int count = 0;
 
 	//Constants and default values
 	private static final int RMB = InputEvent.BUTTON1_MASK;
@@ -48,15 +49,17 @@ public class GameRobot {
 		boolean set = false;
 		//Searches in the top left region of the screen
 		for(int i = 15; i < 200 & !set; i++) {
+            R.mouseMove(i,15);
 			for(int j = 15; j < 200 & !set; j++) {
 				found = getColorSave(i, j);
-				R.mouseMove(i,j);
+				//R.mouseMove(i,j);
 				//This logic is currently lame
 				if(found.getRGB() == goal.getRGB()) {
 					TL = new Point(i,j);
 					set = true;
 				}
 			}
+            R.mouseMove(i,200);
 		}
 		storeSave("test");
 		return set;

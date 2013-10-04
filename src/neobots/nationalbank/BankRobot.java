@@ -27,6 +27,7 @@ public class BankRobot extends GameRobot {
 			doors[i] = getColorRT(doorLoc[i], 150);
 			move(doorLoc[i], 150);
 		}
+        int character = 0;
 		while(true) {
 			/*temp = r.getPixelColor(TLCorner.x + 345, TLCorner.y + 25);
 			r.mouseMove(TLCorner.x + 345, TLCorner.y + 25);
@@ -49,11 +50,12 @@ public class BankRobot extends GameRobot {
 						continue;
 					} else {
 						open[i] = true;
+                        save();
 					}
-					for(int k = -10; k <= 10; k += 20) {
-						for(int j = 140; j < 200; j += 20) {
-							temp = getColorRT(doorLoc[i] + k, j);
-							move(doorLoc[i] + k, j);
+					for(int k = -10; k <= 10; k++) {
+					    move(doorLoc[i] + k, 100);
+						for(int j = 140; j < 200; j++) {
+							temp = getColorSave(doorLoc[i] + k, j);
 							colorSum[0] += temp.getRed();
 							colorSum[1] += temp.getGreen();
 							colorSum[2] += temp.getBlue();
@@ -68,39 +70,10 @@ public class BankRobot extends GameRobot {
 						case 4: key = 'K'; break;
 						case 5: key = 'L'; break;
 					}
-					if(colorSum[1] > 150 && colorSum[1] < 600) {
-							if(colorSum[0] < 50) {
-								System.out.println("Fuzzy blue guy is at door "+i+".");
-							} else if(colorSum[0] < 170) {
-								System.out.println("Blue cat thing at door "+i+".");
-							} else if(colorSum[0] < 300) {
-								if(colorSum[2] > 300) {
-									System.out.println("Blue papers guy is at door "+i+".");
-								} else if(colorSum[2] > 200) {
-									System.out.println("Frog dude at door "+i+".");
-								} else {
-									press(key);
-									System.out.println("Stopped green bandit at door "+i+".");
-							}
-						} else if(colorSum[0] < 400) {
-							press(key);
-							System.out.println("Stopped evil twins at door "+i+".");
-						} else if(colorSum[0] < 600) {
-							System.out.println("Penguin dude is at door "+i+".");
-						} else {
-							press(key);
-							System.out.println("Stopped tall lizard at door "+i+".");
-						}
-					} else if(colorSum[1] < 200) {
-						if(colorSum[2] > 5) {
-							press(key);
-							System.out.println("Stopped red dragon at door "+i+".");
-						} else {
-							System.out.println("Blue dragon at door "+i+".");
-						}
-					} else {
-						System.out.println(""+colorSum[0]+","+colorSum[1]+","+colorSum[2]+" at door "+i+".");
-					}
+                    System.out.printf("C:%d R:%d G:%d B:%d\n",
+                        character, colorSum[0], colorSum[1], colorSum[2]);
+                    storeSave("" +character++);
+				
 				} else {
 					open[i] = false;
 				}
