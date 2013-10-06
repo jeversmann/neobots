@@ -17,7 +17,6 @@ public class BankRobot extends GameRobot {
 
 	public void play() {
 		Color[] doors = new Color[6];
-		boolean[] open = new boolean[6];
 		if(!align("build/nationalbank.png"))
 			return;
         press(' ');
@@ -27,15 +26,9 @@ public class BankRobot extends GameRobot {
 			doors[i] = getColorRT(doorLoc[i], 150);
 			move(doorLoc[i], 150);
 		}
-        int character = 0;
+        int[] colorSum;
+        int[] livesColor = new int[3];
 		while(true) {
-			/*temp = r.getPixelColor(TLCorner.x + 345, TLCorner.y + 25);
-			r.mouseMove(TLCorner.x + 345, TLCorner.y + 25);
-			if(temp.getRed() < 100) {
-				r.keyPress(KeyEvent.VK_SPACE);
-				System.out.println("Made some gold!");
-				r.keyRelease(KeyEvent.VK_SPACE);
-			}*/
 			Color temp = getColorRT(267, 50);
 			move(267, 140);
 			if(wall.getRGB() != temp.getRGB()) {
@@ -43,15 +36,9 @@ public class BankRobot extends GameRobot {
 			}
 			for(int i = 0; i < 6; i++) {
 				temp = getColorRT(doorLoc[i], 150);
-				//move(doorLoc[i], 150);
 			 	if(doors[i].getRGB() != temp.getRGB()) {
-					int[] colorSum = new int[3];
-					if(open[i]) {
-						continue;
-					} else {
-						open[i] = true;
-                        save();
-					}
+					colorSum = new int[3];
+                    save();
 					for(int k = -10; k <= 10; k++) {
 					    move(doorLoc[i] + k, 100);
 						for(int j = 140; j < 200; j++) {
@@ -70,14 +57,51 @@ public class BankRobot extends GameRobot {
 						case 4: key = 'K'; break;
 						case 5: key = 'L'; break;
 					}
-                    System.out.printf("C:%d R:%d G:%d B:%d\n",
-                        character, colorSum[0], colorSum[1], colorSum[2]);
-                    storeSave("" +character++);
-				
-				} else {
-					open[i] = false;
-				}
+                    if( match(colorSum, 80000, 40000, 35000) ||
+                        match(colorSum, 51000, 38000, 24000) ||
+                        match(colorSum, 58000, 73000,  7000) ||
+                        match(colorSum,163000, 90000, 70000) ) {
+                        press(key);
+                    }
+                }
 			}
+            colorSum = new int[3];
+            for(int i = 0; i <= 10; i++) {
+                for(int j = 0; j <= 20; j++) {
+                    temp = getColorSave(340 + i, 12 + j);
+					colorSum[0] += temp.getRed();
+					colorSum[1] += temp.getGreen();
+					colorSum[2] += temp.getBlue();
+                }
+            }
+            if(!( colorSum[0] == 41747 && colorSum[1] == 41747
+                && colorSum[2] == 41740)) {
+                press(' ');
+            }
+            colorSum = new int[3];
+            for(int i = 0; i <= 10; i++) {
+                for(int j = 0; j <= 20; j++) {
+                    temp = getColorSave(250 + i, 12 + j);
+					colorSum[0] += temp.getRed();
+					colorSum[1] += temp.getGreen();
+					colorSum[2] += temp.getBlue();
+                }
+            }
+            if(!( colorSum[0] == livesColor[0] &&
+                  colorSum[1] == livesColor[1] &&
+                  colorSum[2] == livesColor[2] )) {
+                storeSave("" + colorSum[0]);
+                livesColor = colorSum;
+            }
+            
+            wait(100);
 		}
 	}
+
+    private boolean match(int rgb[], int r, int g, int b) {
+        int range = 20000;
+        return( rgb[0] < r + range && rgb[0] > r - range &&
+                rgb[1] < g + range && rgb[1] > g - range &&
+                rgb[2] < b + range && rgb[2] > b - range );
+    }
 }
