@@ -17,5 +17,9 @@ nationalbank: clean common
 mastermindpackage:
 	javac -d build src/mastermind/*.java
 
+sudokupackage:
+	javac -d build src/sudoku/*.java
+
+
 common:
 	javac -d build src/neobots/common/*.java
