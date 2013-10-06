@@ -1,5 +1,5 @@
 clean:
-	-rm -rf build
+	-rm -r build
 	-mkdir build
 
 timetunnel: clean common mastermindpackage
@@ -13,6 +13,10 @@ typingterror: clean common
 nationalbank: clean common
 	javac -d build -cp build src/neobots/nationalbank/*.java
 	cp src/neobots/nationalbank/*.png build/
+
+roodoku: clean common sudokupackage
+	javac -d build -cp build src/neobots/roodoku/*.java
+	cp src/neobots/roodoku/*.png build/
 
 mastermindpackage:
 	javac -d build src/mastermind/*.java

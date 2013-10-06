@@ -1,6 +1,7 @@
 build/
 
 *.class
+.*.swp
 
 # Package Files #
 *.jar
